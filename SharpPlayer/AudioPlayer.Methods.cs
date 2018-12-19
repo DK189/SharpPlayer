@@ -8,25 +8,21 @@ namespace SharpPlayer
 {
     public partial class AudioPlayer : IPlayerControl
     {
-        protected override void LoadCacheData()
+        protected void LoadCacheData()
         {
-            if (_MediaUri != null)
+            MediaUri = _MediaUri;
+            Position = _Position;
+            Volume = _Volume;
+            if (_Mute.HasValue)
             {
-                PlayerInstance.SetMediaUri(_MediaUri);
-            }
-            if (_Position != -1)
-            {
-                PlayerInstance.Position = _Position;
-            }
-            if (_Volume != -1)
-            {
-                PlayerInstance.Volume = _Volume;
+                Mute = _Mute.Value;
             }
         }
 
         private Uri _MediaUri;
         private long _Position;
         private int _Volume;
+        private bool? _Mute = null;
 
         public Uri MediaUri
         {
@@ -83,6 +79,19 @@ namespace SharpPlayer
                 }
                 _Volume = value;
                 PlayerInstance.Volume = _Volume;
+            }
+        }
+
+        public bool Mute
+        {
+            get
+            {
+                return PlayerInstance == null ? false : PlayerInstance.Mute;
+            }
+            set
+            {
+                _Mute = value;
+                PlayerInstance.Mute = _Mute.Value;
             }
         }
 

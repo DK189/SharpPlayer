@@ -53,8 +53,8 @@ namespace SharpPlayer.PlayerInstance
         /// <param name="libVlc_path"></param>
         public VlcInstance(string libVlcCore_path, string libVlc_path)
         {
-            LibVlcCore = DarkKernel.Kernel.LoadLibrary(libVlcCore_path);
-            LibVlc = DarkKernel.Kernel.LoadLibrary(libVlc_path);
+            LibVlcCore = SharpKernel.Kernel.LoadLibrary(libVlcCore_path);
+            LibVlc = SharpKernel.Kernel.LoadLibrary(libVlc_path);
 
             if (LibVlcCore == IntPtr.Zero)
             {
@@ -87,7 +87,7 @@ namespace SharpPlayer.PlayerInstance
 
         public T LoadFunc<T>() where T : class
         {
-            return DarkKernel.Kernel.LoadFunction<T>(LibVlc, typeof(T).Name);
+            return SharpKernel.Kernel.LoadFunction<T>(LibVlc, typeof(T).Name);
         }
 
         public long Position
@@ -163,6 +163,18 @@ namespace SharpPlayer.PlayerInstance
             set
             {
                 LoadFunc<libvlc_audio_set_volume>()(LibVlcMediaPlayer, value);
+            }
+        }
+
+        public bool Mute
+        {
+            get
+            {
+                return LoadFunc<libvlc_audio_get_mute>()(LibVlcMediaPlayer) == 1;
+            }
+            set
+            {
+                LoadFunc<libvlc_audio_set_mute>()(LibVlcMediaPlayer, value ? 1 : 0);
             }
         }
 

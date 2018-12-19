@@ -17,17 +17,10 @@ namespace SharpPlayer
     [ToolboxItem(typeof(VideoPlayer))]
     [ToolboxItemFilter("System.Windows.Forms")]
     [Description("SharpPlayer - VideoPlayer")]
-    public partial class AudioPlayer : SharpPlayerControl
+    public partial class AudioPlayer : Component, ISharpPlayer
     {
         public AudioPlayer()
         {
-            this.SuspendLayout();
-
-            this.Name = "VideoPlayer";
-            this.BackColor = Color.Black;
-
-            this.ResumeLayout();
-
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
                 return;
@@ -49,19 +42,19 @@ namespace SharpPlayer
             LoadCacheData();
         }
 
-        public override void SetupWithVLC()
+        public void SetupWithVLC()
         {
             var vlc = new VlcInstance();
             Setup(vlc);
         }
 
-        public override void SetupWithVLC(string libVlc_directory)
+        public void SetupWithVLC(string libVlc_directory)
         {
             var vlc = new VlcInstance(libVlc_directory);
             Setup(vlc);
         }
 
-        public override void SetupWithVLC(string libVlcCore_path, string libVlc_path)
+        public void SetupWithVLC(string libVlcCore_path, string libVlc_path)
         {
             var vlc = new VlcInstance(libVlcCore_path, libVlc_path);
             Setup(vlc);

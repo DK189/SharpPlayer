@@ -8,25 +8,21 @@ namespace SharpPlayer
 {
     public partial class VideoPlayer : IPlayerControl, IVideoPlayerControl
     {
-        protected override void LoadCacheData ()
+        protected void LoadCacheData()
         {
-            if (_MediaUri != null)
+            MediaUri = MediaUri;
+            Position = Position;
+            Volume = Volume;
+            if (_Mute.HasValue)
             {
-                PlayerInstance.SetMediaUri(_MediaUri);
-            }
-            if (_Position != -1)
-            {
-                PlayerInstance.Position = _Position;
-            }
-            if (_Volume != -1)
-            {
-                PlayerInstance.Volume = _Volume;
+                Mute = _Mute.Value;
             }
         }
 
         private Uri _MediaUri;
         private long _Position = -1;
         private int _Volume = -1;
+        private bool? _Mute = null;
 
         public Uri MediaUri
         {
@@ -78,18 +74,48 @@ namespace SharpPlayer
             }
         }
 
-        public int Volume { get
+        public int Volume
+        {
+            get
             {
                 return PlayerInstance == null ? 0 : PlayerInstance.Volume;
             }
             set
             {
+                if (0 <= value && value <= 100)
+                {
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "Volume",
+                        string.Format(
+                            "Value of '{0}' is not valid for 'Volume'. 'Volume' should be between '{1}' and '{2}'.",
+                            value,
+                            0,
+                            100
+                        )
+                    );
+                }
                 if (PlayerInstance == null)
                 {
                     return;
                 }
                 _Volume = value;
                 PlayerInstance.Volume = _Volume;
+            }
+        }
+
+        public bool Mute
+        {
+            get
+            {
+                return PlayerInstance == null ? false : PlayerInstance.Mute;
+            }
+            set
+            {
+                _Mute = value;
+                PlayerInstance.Mute = _Mute.Value;
             }
         }
 

@@ -12,6 +12,7 @@ namespace SharpPlayer
         long Position { get; set; }
         long Duration { get; }
         int Volume { get; set; }
+        bool Mute { get; set; }
         void Play();
         void Pause();
         void Stop();

@@ -67,10 +67,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DarkKernel">
-      <HintPath>M:\$DK189$\VS Projects\Projects\DarkKernel\DarkKernel\bin\Debug\DarkKernel.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="SharpKernel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpKernel.1.0.0\lib\net40\SharpKernel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -95,7 +95,9 @@
     <Compile Include="IVideoPlayerControl.cs" />
     <Compile Include="IVideoPlayerInstance.cs" />
     <Compile Include="PlayerInstance\VlcInstance.cs" />
+    <Compile Include="PlayerInstance\VlcInterops\libvlc_audio_get_mute.cs" />
     <Compile Include="PlayerInstance\VlcInterops\libvlc_audio_get_volume.cs" />
+    <Compile Include="PlayerInstance\VlcInterops\libvlc_audio_set_mute.cs" />
     <Compile Include="PlayerInstance\VlcInterops\libvlc_audio_set_volume.cs" />
     <Compile Include="PlayerInstance\VlcInterops\libvlc_media_get_duration.cs" />
     <Compile Include="PlayerInstance\VlcInterops\libvlc_media_new_location.cs" />
@@ -116,15 +118,17 @@
     <Compile Include="PlayerInstance\VlcInterops\libvlc_video_get_size.cs" />
     <Compile Include="PlayerInstance\VlcInterops\libvlc_video_take_snapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharpPlayerControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ISharpPlayer.cs" />
     <Compile Include="VideoPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VideoPlayer.Methods.cs">
       <SubType>Component</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="SharpPlayer.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

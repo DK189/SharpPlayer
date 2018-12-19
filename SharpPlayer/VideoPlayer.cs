@@ -17,7 +17,7 @@ namespace SharpPlayer
     [ToolboxItem(typeof(VideoPlayer))]
     [ToolboxItemFilter("System.Windows.Forms")]
     [Description("SharpPlayer - VideoPlayer")]
-    public partial class VideoPlayer : SharpPlayerControl
+    public partial class VideoPlayer : Control, ISharpPlayer
     {
         public VideoPlayer()
         {
@@ -54,19 +54,19 @@ namespace SharpPlayer
             LoadCacheData();
         }
 
-        public override void SetupWithVLC()
+        public void SetupWithVLC()
         {
             var vlc = new VlcInstance();
             Setup(vlc, vlc);
         }
 
-        public override void SetupWithVLC(string libVlc_directory)
+        public void SetupWithVLC(string libVlc_directory)
         {
             var vlc = new VlcInstance(libVlc_directory);
             Setup(vlc, vlc);
         }
 
-        public override void SetupWithVLC(string libVlcCore_path, string libVlc_path)
+        public void SetupWithVLC(string libVlcCore_path, string libVlc_path)
         {
             var vlc = new VlcInstance(libVlcCore_path, libVlc_path);
             Setup(vlc, vlc);

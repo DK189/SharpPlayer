@@ -14,9 +14,8 @@ namespace SharpPlayer
 {
     [ComVisible(true)]
     [Docking(DockingBehavior.Ask)]
-    [ToolboxItem(typeof(VideoPlayer))]
     [ToolboxItemFilter("System.Windows.Forms")]
-    [Description("SharpPlayer - VideoPlayer")]
+    [Description("SharpPlayer - AudioPlayer")]
     public partial class AudioPlayer : Component, ISharpPlayer
     {
         public AudioPlayer()

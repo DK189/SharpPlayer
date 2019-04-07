@@ -13,6 +13,8 @@ namespace Examples
         [STAThread]
         static void Main()
         {
+            SharpPlayer.Default.SetupWithVLC(@"C:\Program Files\VideoLAN\VLC");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Tester());

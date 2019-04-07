@@ -15,14 +15,13 @@ namespace Examples
     {
         public Tester()
         {
-            SharpPlayer.Default.SetupWithVLC(@"C:\Program Files\VideoLAN\VLC");
-
             InitializeComponent();
         }
 
         private void Tester_Load(object sender, EventArgs e)
         {
             //videoPlayer1.MediaUri = new Uri("https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c75b144ced5e4f5e8c1bd18f5c18fa08f4538297_full.jpg");
+            //videoPlayer1.MediaUri = new Uri("https://steamcdn-a.akamaihd.net/steam/apps/2037716/movie480.webm?t=1447370570");
             videoPlayer1.MediaUri = new Uri("https://steamcdn-a.akamaihd.net/steam/apps/2037716/movie480.webm?t=1447370570");
             videoPlayer1.Play();
         }

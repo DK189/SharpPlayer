@@ -14,7 +14,6 @@ namespace SharpPlayer
 {
     [ComVisible(true)]
     [Docking(DockingBehavior.Ask)]
-    [ToolboxItem(typeof(VideoPlayer))]
     [ToolboxItemFilter("System.Windows.Forms")]
     [Description("SharpPlayer - VideoPlayer")]
     public partial class VideoPlayer : Control, ISharpPlayer
@@ -25,8 +24,9 @@ namespace SharpPlayer
 
             this.Name = "VideoPlayer";
             this.BackColor = Color.Black;
+            this.Size = new System.Drawing.Size(80,80);
 
-            this.ResumeLayout();
+            this.ResumeLayout(false);
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
@@ -37,6 +37,19 @@ namespace SharpPlayer
             {
                 Setup(Default.PlayerInstance, Default.VideoPlayerInstance);
             }
+        }
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+
+            }
+            base.Dispose(disposing);
         }
 
 
